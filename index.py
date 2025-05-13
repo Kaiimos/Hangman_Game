@@ -1,14 +1,40 @@
 import random
 
-mots = ["python", "programmation", "ordinateur", "intelligence"]
+print("Bienvenue dans le jeu du Pendu !")
 
-mot_a_deviner = random.choice(mots)
+# Menu avec sélection par chiffre
+print("\nChoisissez un niveau :")
+print("1 - Facile")
+print("2 - Moyen")
+print("3 - Difficile")
+
+choix = input("Entrez le numéro du niveau (1, 2 ou 3) : ").strip()
+
+# Chemins mis à jour avec le dossier "words_list/"
+fichiers_niveaux = {
+    "1": "words_list/mots_faciles.txt",
+    "2": "words_list/mots_moyens.txt",
+    "3": "words_list/mots_difficiles.txt"
+}
+
+# Fichier choisi selon l’entrée, défaut = facile
+nom_fichier = fichiers_niveaux.get(choix, "words_list/mots_faciles.txt")
+
+# Chargement des mots
+try:
+    with open(nom_fichier, "r", encoding="utf-8") as f:
+        mots = [ligne.strip() for ligne in f if ligne.strip()]
+except FileNotFoundError:
+    print(f"Erreur : le fichier {nom_fichier} est introuvable.")
+    exit()
+
+mot_a_deviner = random.choice(mots).lower()
+
 lettres_trouvees = ["_" for _ in mot_a_deviner]
 lettres_essayees = set()
 chances = 6
 
-print("Bienvenue dans le jeu du Pendu !")
-
+# Boucle principale du jeu
 while chances > 0 and "_" in lettres_trouvees:
     print("\nMot à deviner :", " ".join(lettres_trouvees))
     print("Lettres essayées :", " ".join(sorted(lettres_essayees)))
@@ -34,6 +60,7 @@ while chances > 0 and "_" in lettres_trouvees:
         chances -= 1
         print("Mauvaise réponse.")
 
+# Fin du jeu
 if "_" not in lettres_trouvees:
     print("\nFélicitations ! Vous avez deviné le mot :", mot_a_deviner)
 else:
