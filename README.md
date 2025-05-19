@@ -8,6 +8,6 @@
 
 ## Ajouts potentiels
 
-- Dessins du pendu en art ASCII
-- Meilleure interface
+- ~~ Dessins du pendu en art ASCII~~ 
+- ~~ Meilleure interface~~ 
 

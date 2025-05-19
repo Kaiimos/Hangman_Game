@@ -1,5 +1,64 @@
 import random
 
+PENDU_PICS = [
+    """
+     +---+
+     |   |
+         |
+         |
+         |
+         |
+    =========""",
+    """
+     +---+
+     |   |
+     O   |
+         |
+         |
+         |
+    =========""",
+    """
+     +---+
+     |   |
+     O   |
+     |   |
+         |
+         |
+    =========""",
+    """
+     +---+
+     |   |
+     O   |
+    /|   |
+         |
+         |
+    =========""",
+    """
+     +---+
+     |   |
+     O   |
+    /|\\  |
+         |
+         |
+    =========""",
+    """
+     +---+
+     |   |
+     O   |
+    /|\\  |
+    /    |
+         |
+    =========""",
+    """
+     +---+
+     |   |
+     O   |
+    /|\\  |
+    / \\  |
+         |
+    ========="""
+]
+
 print()
 print("Bienvenue dans le Hangman Game :")
 print()
@@ -11,7 +70,6 @@ print()
 niveau = ""
 while niveau not in ["1", "2", "3"]:
     niveau = input("Choisissez un niveau : ").strip()
-
     if niveau not in ["1", "2", "3"]:
         print("Niveau invalide. Veuillez entrer 1, 2 ou 3.")
 
@@ -41,6 +99,7 @@ print()
 print(f"Niveau sélectionné : {niveaux_noms[niveau]}")
 
 while chances > 0 and "_" in lettres_trouvees:
+    print(PENDU_PICS[6 - chances])
     print("\nMot à deviner :", " ".join(lettres_trouvees))
     print("Lettres essayées :", " ".join(sorted(lettres_essayees)))
     print(f"Chances restantes : {chances}")
@@ -65,7 +124,9 @@ while chances > 0 and "_" in lettres_trouvees:
         chances -= 1
         print("Mauvaise réponse.")
 
+
+print(PENDU_PICS[6 - chances])
 if "_" not in lettres_trouvees:
-    print("\nFélicitations ! Vous avez deviné le mot :", mot_a_deviner)
+    print("\n🎉 Félicitations ! Vous avez deviné le mot :", mot_a_deviner)
 else:
-    print("\nVous avez perdu. Le mot était :", mot_a_deviner)
+    print("\n💀 Vous avez perdu. Le mot était :", mot_a_deviner)
